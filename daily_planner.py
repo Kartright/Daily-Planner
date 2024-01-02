@@ -1,8 +1,6 @@
 from datetime import *
 
 
-
-
 def menu():
     print("Enter the number that corresponds to the menu option. Press q to exit.")
     print("1. Create Planner")
@@ -16,9 +14,12 @@ def menu():
         file_name = input("Please input the date of the planner you would like to load.\nWeekday/Day/Month/Year: ")
         load_planner(file_name)
 
+
 def create_planner():
 
-    f = open(get_date(),'w')
+    day = input("In how mandy days is the desired date from todays date? (Type 0 for todays date)\n")
+
+    f = open(get_date(day),'w')
 
     print("Begin by typing the task. Type 'exit' to stop adding tasks and display planner.")
     task_list = []
@@ -33,9 +34,9 @@ def create_planner():
         task_list.append(single_task_list)
         task = input("Please input the next task: ")
 
-    display_lines(get_date())
+    display_lines(get_date(day))
 
-    f.write(get_date() + '\n')
+    f.write(get_date(day) + '\n')
 
     task_list = sorted(task_list)
 
@@ -57,8 +58,8 @@ def load_planner(file_name):
         print(line)
 
 
-def get_date():
-    now = datetime.today()
+def get_date(num_of_days):
+    now = datetime.today() + timedelta(days=int(num_of_days))
     date = now.strftime('%A %d %B %Y')
     date = date
     return date
