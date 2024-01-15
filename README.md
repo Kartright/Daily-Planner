@@ -1,5 +1,5 @@
 # Daily-Planner
-Python program for building and saving simple daily planners
+Python program for building and saving simple daily planners.
 Events are sorted chronologically so there is no need to worry about the order in which events are added to planners.
 
 **Creating Planners:**
