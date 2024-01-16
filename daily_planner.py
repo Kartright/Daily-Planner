@@ -1,4 +1,6 @@
 from datetime import *
+import glob
+import os
 
 
 def menu():
@@ -15,11 +17,13 @@ def menu():
             create_planner()
             menu()
         elif selection == '2':
-            file_name = input("Please input the date of the planner you would like to load.\nDay/Month/Year: ")
+            display_all()
+            file_name = input("Please input the date of the planner you would like to load.\nDay/Month/Year: ") + ".plan"
             load_planner(file_name)
             menu()
         elif selection == '3':
-            file_name = input("Please input the date of the planner you would like to edit.\nDay/Month/Year: ")
+            display_all()
+            file_name = input("Please input the date of the planner you would like to edit.\nDay/Month/Year: ") + ".plan"
             edit_planner(file_name)
             menu()
     pass
@@ -29,7 +33,8 @@ def create_planner():
 
     day = input("In how many days is the desired date from todays date? (Type 0 for todays date)\n")
 
-    f = open(get_date(day),'w')
+    file_name = get_date(day) + ".plan"
+    f = open(file_name,'w')
 
     print("Begin by typing the task. Type 'exit' to stop adding tasks and display planner.")
     task_list = []
@@ -127,7 +132,15 @@ def display_lines(text):
     print(text.center(50))
     print('-'*50)
     print('-'*50)
-    
+
+
+def display_all():
+    planner_list = glob.glob("*.plan")
+    print('-'*50)
+    for i in planner_list:
+        print(os.path.splitext(i)[0])
+    print('-'*50)
 
 if __name__ == "__main__":
+    print(glob.glob("*.plan"))
     menu()
